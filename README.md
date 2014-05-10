@@ -1,4 +1,4 @@
-puzzles
-=======
+Puzzles and Algorithms
+======================
 
-puzzles \ algorithms
+This is my personal collection of solved puzzles and different algorithms

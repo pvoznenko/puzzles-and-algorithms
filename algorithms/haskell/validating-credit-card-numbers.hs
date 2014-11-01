@@ -29,19 +29,27 @@ toDigits :: Integer -> [Integer]
 toDigits 0 = []
 toDigits n = toDigits (n `div` 10) ++ [n `mod` 10]
 
+-- toDigits 1234 -> [1, 2, 3, 4]
+
 toDigitsRev :: Integer -> [Integer]
 toDigitsRev n = reverse (toDigits n)
+
+-- toDigitsRev 1234 -> [4, 3, 2, 1]
 
 doubleSecond :: [Integer] -> [Integer]
 doubleSecond [] = []
 doubleSecond (x : y : xs) = x : 2 * y : doubleSecond xs
 doubleSecond a = a
 
+-- doubleSecond [4, 3, 5, 8] -> [4, 6, 5, 16]
+
 sumDigits :: [Integer] -> Integer
 sumDigits [] = 0
 sumDigits (x : xs)
   | x >= 10 = sum (toDigits x) + sumDigits xs
   | otherwise = x + sumDigits xs
+
+-- sumDigits [4, 6, 5, 16] -> 4 + 6 + 5 + (1 + 6) = 22
 
 isValid :: Integer -> Bool
 isValid n = (sumDigits (doubleSecond (toDigitsRev n)) `mod` 10) == 0

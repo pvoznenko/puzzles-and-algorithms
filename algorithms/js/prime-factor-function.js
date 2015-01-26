@@ -9,8 +9,8 @@
      * Returns prime factor tree
      *
      * @param {Number} number required
-     * @param {Number} div
-     * @param {Array} arr
+     * @param {Number?} div
+     * @param {Array?} arr
      * @returns {Array}
      */
     var primeFactorTree = function(number, div, arr) {

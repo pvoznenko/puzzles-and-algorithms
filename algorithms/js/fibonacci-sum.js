@@ -10,7 +10,7 @@ var fibonacciSumMemoization = (function() {
             return memo[n];
         }
 
-        memo[n] = (n <= 2) ? 1 : fibonacciSumMemoization(n - 2) + fibonacciSumMemoization(n - 1);
+        memo[n] = (n < 2) ? n : fibonacciSumMemoization(n - 1) + fibonacciSumMemoization(n - 2);
 
         return memo[n];
     };

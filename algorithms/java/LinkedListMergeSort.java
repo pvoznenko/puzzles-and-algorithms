@@ -124,12 +124,11 @@ public class LinkedListMergeSort {
     }
 
     public static void printList(Node node) {
-        if (node != null) {
-            while (node != null) {
-                System.out.print(node.val + " ");
-                node = node.next;
-            }
-            System.out.println();
+        while (node != null) {
+            System.out.print(node.val + " ");
+            node = node.next;
         }
+
+        System.out.println();
     }
 }

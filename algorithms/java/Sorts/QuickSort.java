@@ -1,6 +1,9 @@
-public class QuickSort {
-    public static int[] sort(int[] items, int left, int right) {
-        if (items.length <= 1) {
+import java.util.ArrayList;
+import java.util.Arrays;
+
+class Quick {
+    public static <T extends Comparable<T>> ArrayList<T> sort(ArrayList<T> items, int left, int right) {
+        if (items.size() <= 1) {
             return items;
         }
 
@@ -17,16 +20,16 @@ public class QuickSort {
         return items;
     }
 
-    private static int partition(int[] items, int left, int right) {
+    private static <T extends Comparable<T>> int partition(ArrayList<T> items, int left, int right) {
         int index = (right + left) / 2;
-        int pivot = items[index];
+        T pivot = items.get(index);
 
         while (left <= right) {
-            while (items[left] < pivot) {
+            while (items.get(left).compareTo(pivot) < 0) {
                 left++;
             }
 
-            while (items[right] > pivot) {
+            while (items.get(right).compareTo(pivot) > 0) {
                 right--;
             }
 
@@ -40,24 +43,27 @@ public class QuickSort {
         return left;
     }
 
-    private static int[] swap(int[] items, int i, int j) {
-        int tmp = items[i];
-        items[i] = items[j];
-        items[j] = tmp;
+    private static <T extends Comparable<T>> ArrayList<T> swap(ArrayList<T> items, int i, int j) {
+        T tmp = items.get(i);
+        items.set(i, items.get(j));
+        items.set(j, tmp);
 
         return items;
     }
+}
 
+public class QuickSort {
     public static void main(String[] args) {
-        int[] items = {4, 3, 2, 3, 4, 5};
+        Integer[] array = {2, 4, 5, 3, 4, 3};
+        ArrayList<Integer> items = new ArrayList<>(Arrays.asList(array));
 
-        items = sort(items, 0, items.length - 1);
+        items = Quick.sort(items, 0, items.size() - 1);
 
         printItems(items); // 2 3 3 4 4 5
     }
 
-    public static void printItems(int[] items) {
-        for (int item : items) {
+    private static <T> void printItems(ArrayList<T> items) {
+        for (T item : items) {
             System.out.print(item + " ");
         }
 

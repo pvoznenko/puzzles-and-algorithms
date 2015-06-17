@@ -1,22 +1,22 @@
-class Node {
-    int val;
-    Node next = null;
+class Node<T extends Comparable<T>> {
+    T val;
+    Node<T> next = null;
 
-    public Node(int val) {
+    public Node(T val) {
         this.val = val;
     }
 }
 
-class ListNode {
-    Node head = null;
+class ListNode<T extends Comparable<T>> {
+    Node<T> head = null;
     int size = 0;
 
-    public ListNode add(int val) {
+    public ListNode<T> add(T val) {
         if (size == 0) {
-            head = new Node(val);
+            head = new Node<>(val);
         } else {
-            Node node = getLastNode();
-            node.next = new Node(val);
+            Node<T> node = getLastNode();
+            node.next = new Node<>(val);
         }
 
         size++;
@@ -24,18 +24,18 @@ class ListNode {
         return this;
     }
 
-    public void addAll(Node node) {
-        Node lastNode = getLastNode();
+    public void addAll(Node<T> node) {
+        Node<T> lastNode = getLastNode();
         lastNode.next = node;
         size += countNodes(node);
     }
 
-    public Node shift() {
+    public Node<T> shift() {
         if (size == 0) {
             return head;
         }
 
-        Node node = head;
+        Node<T> node = head;
         head = head.next;
         node.next = null;
         size--;
@@ -43,8 +43,8 @@ class ListNode {
         return node;
     }
 
-    private Node getLastNode() {
-        Node node = head;
+    private Node<T> getLastNode() {
+        Node<T> node = head;
 
         while (node.next != null) {
             node = node.next;
@@ -53,7 +53,7 @@ class ListNode {
         return node;
     }
 
-    private int countNodes(Node node) {
+    private int countNodes(Node<T> node) {
         int count = 0;
 
         while (node != null) {
@@ -66,18 +66,18 @@ class ListNode {
 }
 
 class MergeSort {
-    public static ListNode sort(ListNode list) {
+    public static <T extends Comparable<T>> ListNode<T> sort(ListNode<T> list) {
         int length = list.size;
 
         if (length <= 1) {
             return list;
         }
 
-        ListNode left = new ListNode();
-        ListNode right = new ListNode();
+        ListNode<T> left = new ListNode<>();
+        ListNode<T> right = new ListNode<>();
         int middle = length / 2;
 
-        Node node;
+        Node<T> node;
 
         while (list.size > 0) {
             node = list.shift();
@@ -90,21 +90,21 @@ class MergeSort {
         return merge(left, right);
     }
 
-    private static ListNode merge(ListNode leftList, ListNode rightList) {
-        ListNode result = new ListNode();
+    private static <T extends Comparable<T>> ListNode<T> merge(ListNode<T> leftList, ListNode<T> rightList) {
+        ListNode<T> result = new ListNode<>();
 
         if (leftList.size == 0 && rightList.size == 0) {
             return result;
         }
 
-        Node node;
+        Node<T> node;
 
         while (leftList.size > 0 && rightList.size > 0) {
-            node = (leftList.head.val <= rightList.head.val ? leftList : rightList).shift();
+            node = (rightList.head.val.compareTo(leftList.head.val) > 0 ? rightList : leftList).shift();
             result.add(node.val);
         }
 
-        ListNode listNode = (leftList.size > 0 ? leftList : rightList);
+        ListNode<T> listNode = (leftList.size > 0 ? leftList : rightList);
         result.addAll(listNode.head);
 
         return result;
@@ -112,9 +112,8 @@ class MergeSort {
 }
 
 public class LinkedListMergeSort {
-
     public static void main(String[] args) {
-        ListNode list = new ListNode();
+        ListNode<Integer> list = new ListNode<>();
 
         list.add(3).add(2).add(4).add(3).add(4).add(5);
 

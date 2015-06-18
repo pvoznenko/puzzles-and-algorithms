@@ -83,28 +83,32 @@ class MaxHeap<T extends Comparable<T>> {
             }
         }
     }
+
+    public int getHeight() {
+        return (int)(Math.log((double)items.size()) / Math.log(2)) + 1;
+    }
 }
 
 public class HeapSort {
     public static void main(String[] args) {
         MaxHeap<Integer> maxHeap = new MaxHeap<>();
 
-        maxHeap.add(3).add(2).add(4).add(3).add(4).add(5);
+        maxHeap.add(3).add(2).add(4).add(3).add(4).add(5).add(5).add(5);
 
-        printHeap(maxHeap.getItems()); // 5 4 4 2 3 3
+        System.out.println("Heap height is: " + maxHeap.getHeight()); // Heap height is: 4
+
+        printHeap(maxHeap.getItems()); // 5 5 5 4 3 3 4 2
 
         maxHeap.remove().remove().remove();
 
-        printHeap(maxHeap.getItems()); // 3 2 3
+        printHeap(maxHeap.getItems()); // 4 3 4 2 3
     }
 
     private static <T> void printHeap(ArrayList<T> items) {
-
         for (T item : items) {
             System.out.print(item + " ");
         }
 
         System.out.println();
     }
-
 }
